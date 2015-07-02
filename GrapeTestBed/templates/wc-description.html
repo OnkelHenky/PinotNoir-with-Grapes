@@ -64,7 +64,7 @@
             callback();
         };
         document.getElementsByTagName('head')[0].appendChild(htmlImportTag);
-        htmlImportTag.href = "http://127.0.0.1:3030//html/remoteTemplate.html";
+        htmlImportTag.href = "http://127.0.0.1:3030/html/remoteTemplate.html";
 
     }
 
@@ -89,7 +89,7 @@
                     }else {
 
                         loadTemplate(function(){
-                            var xx = document.querySelector('link[href="http://127.0.0.1:3030//html/remoteTemplate.html"]');
+                            var xx = document.querySelector('link[href="http://127.0.0.1:3030/html/remoteTemplate.html"]');
                             reloadImport = xx.import;
 
                             console.dir(reloadImport);
