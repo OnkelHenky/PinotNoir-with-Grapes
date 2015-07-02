@@ -2,6 +2,12 @@
 logs
 *.log
 
+.idea/*
+bin/*
+.npm-debug.log
+.DS_Store
+node_modules
+
 # Runtime data
 pids
 *.pid
