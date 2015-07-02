@@ -11,7 +11,7 @@ var express = require('express')
     , routes = require('./routes')
     , user = require('./routes/user')
     , cors = require('cors')
-    , socketLogic = require('./PinotGris_socketlogic.js')
+    , socketLogic = require('./Pinot_4Grapes_Socketlogic.js')
     , path = require('path');
 
 
@@ -53,7 +53,7 @@ app.get('/', routes.index);
 
 
 server.listen(app.get('port'), function(){
-    console.log("PinotGris Server at: http://127.0.0.1 listening on port " + app.get('port'));
+    console.log("Pinot 4 Grapes Server at: http://127.0.0.1 listening on port " + app.get('port'));
 });
 
 /* Starting the WebSocket magic */
