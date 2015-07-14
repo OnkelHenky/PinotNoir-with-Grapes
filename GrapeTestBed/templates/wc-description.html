@@ -55,8 +55,6 @@
 
         console.log('about to load the template');
 
-        //   <link href="../templates/wc-description.html" rel="import">
-        //   http://localhost:63342/PinotNoir/Noir/html/index.html
         var htmlImportTag = document.createElement("link");
         htmlImportTag.rel = "import";
         htmlImportTag.onload = function () {
@@ -64,7 +62,7 @@
             callback();
         };
         document.getElementsByTagName('head')[0].appendChild(htmlImportTag);
-        htmlImportTag.href = "http://127.0.0.1:3030/html/remoteTemplate.html";
+        htmlImportTag.href = "http://127.0.0.1:3030/grapes/desc_pic_support.html";
 
     }
 
@@ -89,7 +87,7 @@
                     }else {
 
                         loadTemplate(function(){
-                            var xx = document.querySelector('link[href="http://127.0.0.1:3030/html/remoteTemplate.html"]');
+                            var xx = document.querySelector('link[href="http://127.0.0.1:3030/grapes/desc_pic_support.html"]');
                             reloadImport = xx.import;
 
                             console.dir(reloadImport);
