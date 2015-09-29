@@ -1,7 +1,7 @@
 
 
-<link rel="import"
-      href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../protoGrapes/grapeRoot.html">
 
 <dom-module id="test-me">
 
@@ -41,82 +41,13 @@
 
 <script>
 
-
-
-
-    function getZeConnectionToPinotServer(){
-        var that = this;
-        console.log('Winter is coming!');
-
-        try{
-
-            var socket = io.connect('http://127.0.0.1:3030');
-
-            socket.on('gpii_update', function (data) {
-                console.log("getting a GPII (settings) update"+data);
-                console.dir(data);
-                console.dir(that);
-
-                if(data.hasOwnProperty('GPIIWebDome')){
-                    var user = data.GPIIWebDome;
-
-                    if('anna' === user){
-                        that.updateTheShadowDOM('#descText');
-                    }else if('paul' === user){
-                        that.updateTheShadowDOM('#descVideo');
-                    }else {
-
-                        loadTemplate(function(){
-                            var xx = document.querySelector('link[href="http://127.0.0.1:3030/grapes/desc_pic_support.html"]');
-                            reloadImport = xx.import;
-
-                            console.dir(reloadImport);
-
-                            var template = reloadImport.querySelector("#descSpec");
-
-                            console.dir(template);
-
-                            var clone = document.importNode(template.content, true);
-
-                            while (that.shadow.hasChildNodes()) {
-                                that.shadow.removeChild(that.shadow.lastChild);
-                            }
-                            that.shadow.appendChild(clone);
-
-
-                        });
-                    }
-                }
-
-            });
-            console.log('Socket in der Compoenent');
-            console.dir(socket);
-        }catch(ex){
-            console.log('exception occurred ' +ex);
-
-        }
-    }
-
+    /*The Polymer function sets up the prototype chain for your custom element,
+     chaining it to the Polymer Base prototype (which provides Polymer value-added features),
+     so you cannot set up your own prototype chain. */
 
     Polymer({
-        is: "test-me",
-
-        created: function() {
-
-            getZeConnectionToPinotServer.apply(this);
-
-        },
-
-        updateTheShadowDOM: function(querySelectorOfnewShadowDOMlement) {
-
-                var template = r._import.querySelector(querySelectorOfnewShadowDOMlement);
-                var clone = document.importNode(template.content, true);
-
-                while (this.shadow.hasChildNodes()) {
-                    this.shadow.removeChild(this.shadow.lastChild);
-                }
-                this.shadow.appendChild(clone);
-            }
+        is: "test-me",      // NOTE: By specification, the custom element’s name must contain a dash (-).
+        behaviors: [Grape]  // Getting the 'Grape' behavior.
 
     });
 
