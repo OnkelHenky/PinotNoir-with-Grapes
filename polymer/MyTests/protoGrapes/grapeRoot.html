@@ -2,7 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Grape Root</title>
+
+    <script type="application/javascript">
+        Grape = {
+/*
+            properties: {
+                isHighlighted: {
+                    type: Boolean,
+                    value: false,
+                    notify: true,
+                    observer: '_highlightChanged'
+                }
+            },
+*/
+            establishConnectioToGPii: function(){
+            var that = this;
+            console.log('Winter is coming!');
+
+            try{
+
+                var socket = io.connect('http://127.0.0.1:3030');
+
+                socket.on('gpii_update', function (data) {
+                    console.log("getting a GPII (settings) update"+data);
+                    console.dir(data);
+                    console.dir(that);
+
+                    if(data.hasOwnProperty('GPIIWebDome')){
+                        var user = data.GPIIWebDome;
+
+                        if('anna' === user){
+                            that.updateTheShadowDOM('#descText');
+                        }else if('paul' === user){
+                            that.updateTheShadowDOM('#descVideo');
+                        }else {
+
+                            loadTemplate(function(){
+                                var xx = document.querySelector('link[href="http://127.0.0.1:3030/grapes/desc_pic_support.html"]');
+                                reloadImport = xx.import;
+
+                                console.dir(reloadImport);
+
+                                var template = reloadImport.querySelector("#descSpec");
+
+                                console.dir(template);
+
+                                var clone = document.importNode(template.content, true);
+
+                                while (that.shadow.hasChildNodes()) {
+                                    that.shadow.removeChild(that.shadow.lastChild);
+                                }
+                                that.shadow.appendChild(clone);
+
+
+                            });
+                        }
+                    }
+
+                });
+                console.log('Socket in der Compoenent');
+                console.dir(socket);
+            }catch(ex){
+                console.log('exception occurred ' +ex);
+
+            }
+        },
+
+            updateTheShadowDOM: function(querySelectorOfnewShadowDOMlement) {
+
+                var template = r._import.querySelector(querySelectorOfnewShadowDOMlement);
+                var clone = document.importNode(template.content, true);
+
+                while (this.shadow.hasChildNodes()) {
+                    this.shadow.removeChild(this.shadow.lastChild);
+                }
+                this.shadow.appendChild(clone);
+            },
+
+
+            created: function() {
+            console.log(' establish connection to GPII for ', this, ' element');
+            this.establishConnectioToGPii();
+        }
+
+            /*_toggleHighlight: function() {
+                this.isHighlighted = !this.isHighlighted;
+            },
+
+            _highlightChanged: function(value) {
+                this.toggleClass('highlighted', value);
+            }*/
+
+        };
+    </script>
+
 </head>
 <body>
 
