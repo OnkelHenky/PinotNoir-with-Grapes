@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <title>Grape Root</title>
 
-    <script type="application/javascript">
-        Grape = {
+    <script>
+      //  window.Polymer = window.Polymer || {};
+     //   window.Polymer.dom = 'shadow';
+
+         var   Grape = Grape || {};
+               Grape.Behavior = {
 /*
             properties: {
                 isHighlighted: {
@@ -25,18 +29,21 @@
                 var socket = io.connect('http://127.0.0.1:3030');
 
                 socket.on('gpii_update', function (data) {
-                    console.log("getting a GPII (settings) update"+data);
+                    console.log("getting a GPII (settings) update" + data);
                     console.dir(data);
-                    console.dir(that);
 
-                    if(data.hasOwnProperty('GPIIWebDome')){
+
+                    if (data.hasOwnProperty('GPIIWebDome')) {
                         var user = data.GPIIWebDome;
 
-                        if('anna' === user){
+                        if ('anna' === user) {
                             that.updateTheShadowDOM('#descText');
-                        }else if('paul' === user){
+                        } else if ('paul' === user) {
                             that.updateTheShadowDOM('#descVideo');
-                        }else {
+
+                        }
+
+                        /*else {
 
                             loadTemplate(function(){
                                 var xx = document.querySelector('link[href="http://127.0.0.1:3030/grapes/desc_pic_support.html"]');
@@ -57,42 +64,51 @@
 
 
                             });
-                        }
+
+                        }3
+                         */
                     }
 
+
                 });
+
                 console.log('Socket in der Compoenent');
                 console.dir(socket);
             }catch(ex){
                 console.log('exception occurred ' +ex);
 
             }
+
         },
 
-            updateTheShadowDOM: function(querySelectorOfnewShadowDOMlement) {
 
-                var template = r._import.querySelector(querySelectorOfnewShadowDOMlement);
-                var clone = document.importNode(template.content, true);
+        /*
+         * Polymer's lifecycle callbacks
+         */
 
-                while (this.shadow.hasChildNodes()) {
-                    this.shadow.removeChild(this.shadow.lastChild);
-                }
-                this.shadow.appendChild(clone);
-            },
-
-
-            created: function() {
+        created: function() {
             console.log(' establish connection to GPII for ', this, ' element');
             this.establishConnectioToGPii();
+        },
+
+        ready: function() {
+            console.log(this.localName + ' is ready');
+           // console.dir(this.$.textSection);
+            this.testMyStuff();
+
+        },
+
+        attached: function() {
+         console.log(this.localName + '#' + this.id + ' was attached');
+        },
+
+        detached: function() {
+            console.log(this.localName + '#' + this.id + ' was detached');
+        },
+
+        attributeChanged: function(name, type) {
+            console.log(this.localName + '#' + this.id + ' attribute ' + name + ' was changed to ' + this.getAttribute(name));
         }
-
-            /*_toggleHighlight: function() {
-                this.isHighlighted = !this.isHighlighted;
-            },
-
-            _highlightChanged: function(value) {
-                this.toggleClass('highlighted', value);
-            }*/
 
         };
     </script>
