@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
 
-</body>
-</html>
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="x-custom">
+
+    <template>
+        Hello World from <span id="name"></span>!
+    </template>
+
+    <script>
+
+        Polymer({
+
+            is: 'x-custom',
+
+            ready: function() {
+                this.$.name.textContent = this.name;
+
+                console.log('Aus ready ');
+
+
+                console.log('Aus created ');
+                console.dir(this.$.name);
+
+
+                this.$.name.textContent = this.attributes['name'].value;
+                console.dir(this.attributes['name'].value);
+
+            },
+
+            created: function() {
+                console.log('hhh '+ this.name);
+
+
+
+
+            }
+
+        });
+
+    </script>
+
+</dom-module>

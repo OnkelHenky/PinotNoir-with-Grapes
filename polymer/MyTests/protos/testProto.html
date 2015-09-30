@@ -1,9 +1,12 @@
-
+<script>
+    window.Polymer = window.Polymer || {};
+    window.Polymer.dom = 'shadow';
+</script>
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 <link rel="import" href="../protoGrapes/grapeRoot.html">
 
-<dom-module id="test-me">
+<dom-module id="pinot-description">
 
 <template id="descText">
     <style>
@@ -22,6 +25,7 @@
     </div>
 </template>
 
+    <!--
 <template id="descVideo">
     <style>
 
@@ -32,12 +36,14 @@
         </video>
         <div class="content">
             <content>
-                <!-- label for="username">username</label -->
+
 
             </content>
         </div>
     </div>
 </template>
+
+    -->
 
 <script>
 
@@ -46,9 +52,34 @@
      so you cannot set up your own prototype chain. */
 
     Polymer({
-        is: "test-me",      // NOTE: By specification, the custom element’s name must contain a dash (-).
-        behaviors: [Grape]  // Getting the 'Grape' behavior.
+        is: "pinot-description",               // NOTE: By specification, the custom element’s name must contain a dash (-).
+        behaviors: [Grape.Behavior],  // Getting the 'Grape' behavior.
+        testMyStuff: function(){
+            console.log('WHEEEEEEEE MY STUFF IS HERE');
+            //Polymer.dom(this).appendChild(this.$.descText);
 
+            var t =  Polymer.dom(this.root);
+            console.log('FF Test + shadowRoot');
+            console.dir(this.root);
+         //   console.dir(this.$.textSection);
+         //   var f = t.node.root;
+           console.dir(this.$.textSection);
+
+
+
+
+        },
+
+        updateTheShadowDOM: function(querySelectorOfnewShadowDOMlement) {
+
+            var template = r._import.querySelector(querySelectorOfnewShadowDOMlement);
+            var clone = document.importNode(template.content, true);
+
+            while (this.shadow.hasChildNodes()) {
+                this.shadow.removeChild(this.shadow.lastChild);
+            }
+            this.shadow.appendChild(clone);
+        }
     });
 
 </script>
