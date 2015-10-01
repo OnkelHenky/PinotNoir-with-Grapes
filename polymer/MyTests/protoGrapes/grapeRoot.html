@@ -65,7 +65,7 @@
 
                             });
 
-                        }3
+                        }
                          */
                     }
 
@@ -82,30 +82,56 @@
         },
 
 
-        /*
-         * Polymer's lifecycle callbacks
-         */
+        /* * * * * * * * * * * * * * * * *
+         *                               *
+         * Polymer's lifecycle callbacks *
+         *                               *
+         * * * * * * * * * * * * * * * * */
 
+
+        /*
+         *  1st method to be called
+         */
         created: function() {
             console.log(' establish connection to GPII for ', this, ' element');
             this.establishConnectioToGPii();
         },
 
+       /*
+        *  local DOM is initialized after created is called!
+        */
+
+       /*
+        *  2nd method to be called
+        */
         ready: function() {
             console.log(this.localName + ' is ready');
            // console.dir(this.$.textSection);
             this.testMyStuff();
+       },
 
-        },
+       /*
+        *  Any custom constructor is called after the 'ready' function (factoryImpl callback)
+        *  See: https://www.polymer-project.org/1.0/docs/devguide/registering-elements.html#custom-constructor
+        */
 
+        /*
+         *  3rd method to be called
+         */
         attached: function() {
          console.log(this.localName + '#' + this.id + ' was attached');
         },
 
+        /*
+         * Element removed from HTML DOM tree
+         */
         detached: function() {
             console.log(this.localName + '#' + this.id + ' was detached');
         },
 
+       /*
+        * a element`s attribute has ben changed
+        */
         attributeChanged: function(name, type) {
             console.log(this.localName + '#' + this.id + ' attribute ' + name + ' was changed to ' + this.getAttribute(name));
         }

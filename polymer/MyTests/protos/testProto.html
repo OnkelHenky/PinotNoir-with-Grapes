@@ -39,7 +39,7 @@
 
 
             </content>
-        </div>
+        </div>f
     </div>
 </template>
 
@@ -49,10 +49,13 @@
 
     /*The Polymer function sets up the prototype chain for your custom element,
      chaining it to the Polymer Base prototype (which provides Polymer value-added features),
-     so you cannot set up your own prototype chain. */
+     so you cannot set up your own prototype chain.
+
+     NOTE: By specification, the custom element’s name must contain a dash '-'
+     */
 
     Polymer({
-        is: "pinot-description",               // NOTE: By specification, the custom element’s name must contain a dash (-).
+        is: "pinot-description",
         behaviors: [Grape.Behavior],  // Getting the 'Grape' behavior.
         testMyStuff: function(){
             console.log('WHEEEEEEEE MY STUFF IS HERE');
@@ -63,10 +66,7 @@
             console.dir(this.root);
          //   console.dir(this.$.textSection);
          //   var f = t.node.root;
-           console.dir(this.$.textSection);
-
-
-
+            console.dir(this.$.textSection);
 
         },
 
